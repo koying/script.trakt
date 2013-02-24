@@ -129,6 +129,8 @@ class Scrobbler(threading.Thread):
 				match['uniqueid'] = self.curVideoData['uniqueid']['unknown']
 			if match == None:
 				return
+			if match['episode'] < 1:
+				return  
 			response = utilities.watchingEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], match['uniqueid']['unknown'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Watch response: "+str(response))
@@ -178,6 +180,8 @@ class Scrobbler(threading.Thread):
 				match['uniqueid'] = self.curVideoData['uniqueid']['unknown']
 			if match == None:
 				return
+			if match['episode'] < 1:
+				return  
 			response = utilities.scrobbleEpisodeOnTrakt(match['tvdb_id'], match['showtitle'], match['year'], match['season'], match['episode'], match['uniqueid']['unknown'], self.totalTime/60, int(100*self.watchedTime/self.totalTime))
 			if response != None:
 				Debug("[Scrobbler] Scrobble response: "+str(response))
